@@ -1,0 +1,65 @@
+/* Shared final layout: one stable header, all pages. */
+[hidden] { display:none !important; }
+html { scroll-padding-top:96px; }
+.site-header, .site-header[data-utility-collapsed="true"] { display:block; height:76px; grid-template-rows:none; overflow:visible; transition:none; transform:none; animation:none; }
+.site-header-inner { height:76px; min-height:76px; gap:22px; grid-row:auto; }
+.site-nav { margin-left:auto; gap:18px; }
+.site-nav a { font-size:.83rem; }
+.header-socials { display:flex; align-items:center; gap:5px; flex:none; }
+.header-socials a { display:grid; place-items:center; width:36px; height:40px; color:var(--muted); border-radius:10px; }
+.header-socials svg { width:18px; height:18px; fill:currentColor; }
+.header-socials a:hover { color:var(--mint); background:rgba(99,234,215,.08); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--mint); outline-offset:4px; }
+.site-mobile-nav { position:absolute; top:76px; left:0; right:0; width:100%; padding:16px 24px 22px; background:#0c1222; border-bottom:1px solid var(--line); max-height:calc(100dvh - 76px); overflow:auto; }
+.credential-grid { gap:24px; align-items:stretch; }
+.credential-card { display:flex; flex-direction:column; min-width:0; padding:0; overflow:hidden; border-radius:20px; }
+.credential-media { width:100%; aspect-ratio:16/10; display:grid; place-items:center; padding:14px; background:#e8edf4; border:0; cursor:zoom-in; }
+.credential-media img { width:100%; height:100%; object-fit:contain; min-height:0; }
+.credential-copy { display:flex; flex-direction:column; flex:1; width:100%; padding:24px; }
+.credential-copy h3 { display:block; -webkit-line-clamp:unset; overflow:visible; font-size:1.08rem; line-height:1.4; margin:10px 0; }
+.credential-issuer { font-size:.75rem; color:var(--mint); }
+.credential-copy >p { font-size:.8rem; line-height:1.6; }
+.credential-actions { margin-top:auto; padding-top:20px; gap:12px; flex-wrap:wrap; }
+.credential-action { min-height:42px; padding:10px 14px; font-size:.8rem; }
+.study-copy { display:flex; flex-direction:column; flex:1; padding:28px; }
+.study-copy .btn { align-self:flex-start; margin-top:auto; }
+.study-copy p { padding-bottom:22px; }
+.study-cover img { width:100%; height:100%; object-fit:cover; }
+.diagram, .architecture-svg { max-width:100%; }
+.table-wrap, .comparison-table { overflow-x:auto; }
+.hero, .page-hero { min-width:0; }
+main p, main li { overflow-wrap:break-word; }
+@media (max-width:1150px) {
+ .site-nav { display:none; }
+ .site-menu { display:flex; }
+ .header-socials { margin-left:auto; }
+ .site-mobile-nav.open { display:grid !important; }
+}
+@media (min-width:1151px) { .site-mobile-nav { display:none !important; } }
+@media (max-width:700px) {
+ .site-header-inner { gap:10px; }
+ .site-brand { font-size:1.15rem; }
+ .header-socials { gap:0; }
+ .header-socials a { width:32px; }
+ .site-menu { width:40px; height:40px; }
+ .credential-copy, .study-copy { padding:20px; }
+ .credential-grid { grid-template-columns:1fr; }
+ .article-card h3 { font-size:1.2rem; line-height:1.35; }
+}
+@media (prefers-reduced-motion:reduce) {
+ *, *::before, *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+ .rv { opacity:1 !important; transform:none !important; }
+}
+
+@media (prefers-reduced-motion:reduce) { .diagram .wire, #architectureDiagram .flow-line { stroke-dashoffset:0 !important; } }
+/* Content stays readable before scripts load and in full-page previews. */
+.rv, .timeline { opacity:1; transform:none; }
+.rv.in { animation:content-arrive .45s ease both; }
+@keyframes content-arrive { from { opacity:.65; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce) { .rv.in { animation:none; } }
+/* Decorative portrait rings must not create a horizontal scroll area. */
+main { overflow-x:clip; }
+.cover:has(img[src$=".svg"]) { aspect-ratio:16/9; }
+.cover img[src$=".svg"] { object-fit:contain; }
+.diagram .wire, .architecture .flow { stroke-dashoffset:0; }
+.timeline .role::before { opacity:1; transform:scale(1); }

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#070b16" />
+    <meta
+      name="description"
+      content="Uber Eats Sri Lanka analytics case study over simulated marketplace data."
+    />
+    <title>Uber Eats Sri Lanka Analytics | Lahiru Niroshan Sathsara</title>
+    </head>
+  <body>
+    
+    
+    <!-- site-header -->
+    <main>
+      <section class="shell hero">
+        <div>
+          <div class="crumb">
+            <a href="/projects/index.html">Projects</a><span>/</span
+            ><span>Uber Eats Sri Lanka Analytics</span>
+          </div>
+          <span class="tag"
+            >Data Analytics / BI · Synthetic data · Case study</span
+          >
+          <h1>
+            From orders<br /><span class="gradient"
+              >to operating decisions.</span
+            >
+          </h1>
+          <p class="lead">
+            A five-page Streamlit platform over synthetic Sri Lankan
+            food-delivery data, built to examine marketplace health, pricing,
+            restaurants, courier operations and restaurant churn signals.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#architecture-anchor"
+              >Explore the system ↓</a
+            ><a
+              class="btn"
+              href="https://github.com/Lahiru1Niroosh/uber-eats-sl-analytics-Project"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View repository ↗</a
+            >
+          </div>
+        </div>
+        <div class="cover">
+          <div class="cover-fallback">
+            <strong>UE</strong><span>Uber Eats Sri Lanka Analytics cover</span>
+          </div>
+          <img decoding="async" width="1586" height="992"
+            src="/assets/uber-eats-cover.webp"
+            alt="Uber Eats Sri Lanka Analytics project cover"
+            onerror="this.remove()"
+          />
+        </div>
+      </section>
+      <div class="shell statline">
+        <div class="stat rv">
+          <strong>70,000+</strong><span>Synthetic 2024 orders</span>
+        </div>
+        <div class="stat rv">
+          <strong>200</strong><span>Simulated restaurants</span>
+        </div>
+        <div class="stat rv">
+          <strong>5 pages</strong><span>Interactive dashboard</span>
+        </div>
+      </div>
+      
+      <section class="shell flow rv"><h2>From generated data to decisions</h2><p>Each stage feeds the next, from simulation to dashboard.</p><div class="flow-track" style="--n:5"><div class="flow-step rv"><b>1</b><div><h3>Generate</h3><p>Synthetic 2024 marketplace data</p></div></div><div class="flow-step rv"><b>2</b><div><h3>Store</h3><p>Orders and partners in SQLite</p></div></div><div class="flow-step rv"><b>3</b><div><h3>Query</h3><p>SQL for demand, pricing, operations</p></div></div><div class="flow-step rv"><b>4</b><div><h3>Model</h3><p>Random Forest flags churn risk</p></div></div><div class="flow-step rv"><b>5</b><div><h3>Explain</h3><p>A five-page Streamlit dashboard</p></div></div></div></section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">The problem</span>
+              <h2>Marketplace metrics need operational context.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            A food-delivery marketplace needs more than a revenue chart. Teams
+            need to see demand by hour, cancellations by cause, zone
+            performance, courier activity and restaurants that may need
+            attention. This portfolio project simulated those operational
+            questions for Sri Lanka using <strong>synthetic data</strong> rather
+            than real Uber Eats records.
+          </p>
+        </div>
+      </section>
+      <section class="section" id="architecture-anchor">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Architecture</span>
+              <h2>Generate, query, model, explain.</h2>
+            </div>
+            <p>The diagram shows how data moves through the project.</p>
+          </div>
+          <div
+            class="diagram rv"
+            role="img"
+            aria-label="Architecture: Faker to SQLite to SQL + Python to Random Forest to Streamlit"
+          >
+            <svg viewBox="0 0 1020 440" aria-hidden="true">
+              <path class="track" d="M 195 219 H 227" />
+              <path
+                id="wire0"
+                class="wire"
+                pathLength="100"
+                d="M 195 219 H 227"
+                style="transition-delay: 0s"
+              />
+              <path class="track" d="M 367 219 H 399" />
+              <path
+                id="wire1"
+                class="wire"
+                pathLength="100"
+                d="M 367 219 H 399"
+                style="transition-delay: 0.19s"
+              />
+              <path class="track" d="M 539 219 H 571" />
+              <path
+                id="wire2"
+                class="wire"
+                pathLength="100"
+                d="M 539 219 H 571"
+                style="transition-delay: 0.38s"
+              />
+              <path class="track" d="M 711 219 H 743" />
+              <path
+                id="wire3"
+                class="wire"
+                pathLength="100"
+                d="M 711 219 H 743"
+                style="transition-delay: 0.57s"
+              />
+              <g class="node">
+                <rect x="55" y="170" width="140" height="98" rx="15" />
+                <text x="125" y="212">Faker</text>
+                <text class="sub" x="125" y="238">Synthetic records</text>
+              </g>
+              <g class="node">
+                <rect x="227" y="170" width="140" height="98" rx="15" />
+                <text x="297" y="212">SQLite</text>
+                <text class="sub" x="297" y="238">Four tables</text>
+              </g>
+              <g class="node">
+                <rect x="399" y="170" width="140" height="98" rx="15" />
+                <text x="469" y="212">SQL + Python</text>
+                <text class="sub" x="469" y="238">Queries and analysis</text>
+              </g>
+              <g class="node">
+                <rect x="571" y="170" width="140" height="98" rx="15" />
+                <text x="641" y="212">Random Forest</text>
+                <text class="sub" x="641" y="238">Churn-risk score</text>
+              </g>
+              <g class="node">
+                <rect x="743" y="170" width="140" height="98" rx="15" />
+                <text x="813" y="212">Streamlit</text>
+                <text class="sub" x="813" y="238">Five dashboard pages</text>
+              </g>
+              <g class="moving">
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.0s" repeatCount="indefinite">
+                    <mpath href="#wire0" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.3s" repeatCount="indefinite">
+                    <mpath href="#wire1" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.6s" repeatCount="indefinite">
+                    <mpath href="#wire2" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.9s" repeatCount="indefinite">
+                    <mpath href="#wire3" />
+                  </animateMotion>
+                </circle>
+              </g>
+            </svg>
+            <div class="diagram-mobile">
+              <div><strong>Faker</strong><span>Synthetic records</span></div>
+              <div><strong>SQLite</strong><span>Four tables</span></div>
+              <div>
+                <strong>SQL + Python</strong><span>Queries and analysis</span>
+              </div>
+              <div>
+                <strong>Random Forest</strong><span>Churn-risk score</span>
+              </div>
+              <div>
+                <strong>Streamlit</strong><span>Five dashboard pages</span>
+              </div>
+            </div>
+          </div>
+          <p class="diagram-note">
+            Python modules generate the synthetic marketplace, run ten business
+            SQL queries and perform deeper analysis. Plotly presents the results
+            in Streamlit.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Key decisions</span>
+              <h2>Why I built it this way.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Separate generation and analysis</h3>
+              <p>
+                A modular generate → analyze → visualize workflow makes the
+                simulated inputs and transformations clear.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Design by business question</h3>
+              <p>
+                Five pages group marketplace, pricing, restaurants, driver
+                operations and churn rather than mixing every chart on one
+                screen.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Use a risk score for outreach</h3>
+              <p>
+                A Random Forest model scores restaurant partners so a partner
+                team can prioritize investigation, not treat a score as
+                confirmed future churn.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Results</span>
+              <h2>Findings in the simulated marketplace.</h2>
+            </div>
+            <p>Scope and measurement matter as much as the headline numbers.</p>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>~82% conversion</h3>
+              <p>
+                Platform-wide conversion in the synthetic order data; the remaining fallout is the gap worth investigating.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>~45% of demand</h3>
+              <p>
+                Orders between 12–14h and 19–21h account for roughly 45% of
+                simulated daily orders.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>~15% high risk</h3>
+              <p>
+                The churn model marks about 15% of simulated restaurant partners
+                as high-risk signals.
+              </p>
+            </article>
+          </div>
+          <p class="note rv" style="margin-top: 20px">
+            <strong>Measurement:</strong> These are descriptive results from
+            generated 2024 marketplace data: 70,000+ orders, 200 restaurants and
+            300 couriers. The churn target is derived from low volume and low
+            conversion; held-out predictive accuracy is not reported here.
+            The elasticity coefficient is approximately −0.5 in this simulated
+            analysis.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">What broke</span>
+              <h2>What I learned while building it.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Synthetic data limits</h3>
+              <p>
+                Because the marketplace is simulated, pricing and churn findings demonstrate the method and the modelling approach, not real Sri Lankan market behaviour.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Model target design</h3>
+              <p>
+                The churn label is based on low order volume and conversion, so
+                the risk score is a demonstration of prioritization rather than
+                externally validated churn prediction.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Synthetic operating context</h3>
+              <p>
+                Data generation enables reproducible scenarios, but the
+                resulting relationships may not represent a live marketplace.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Limitations</span>
+              <h2>What this project does not claim.</h2>
+            </div>
+          </div>
+          <div class="note rv">
+            All marketplace records are <strong>synthetic</strong>. The model
+            target is a constructed churn label, and no held-out model accuracy or causal pricing estimate is claimed. Findings are
+            portfolio demonstrations and should not be described as real Uber
+            Eats Sri Lanka performance.
+          </div>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Explore the work</span>
+              <h2>Code, report and next steps.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            Explore the five-page dashboard or inspect the data generator, SQL
+            queries, analysis modules and Streamlit application in the
+            repository.
+          </p>
+          <div class="actions rv">
+            <a class="btn btn-primary"
+              href="https://github.com/Lahiru1Niroosh/uber-eats-sl-analytics-Project"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub repository ↗</a
+            ><a class="btn" href="/projects/index.html">All projects →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- site-footer -->
+  </body>
+</html>

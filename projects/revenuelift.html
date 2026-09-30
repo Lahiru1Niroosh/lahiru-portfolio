@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#070b16" />
+    <meta
+      name="description"
+      content="RevenueLift case study: simulated checkout A/B test with multiple-testing correction and mobile-only recommendation."
+    />
+    <title>
+      RevenueLift — A/B Test Decision Platform | Lahiru Niroshan Sathsara
+    </title>
+    </head>
+  <body>
+    
+    
+    <!-- site-header -->
+    <main>
+      <section class="shell hero">
+        <div>
+          <div class="crumb">
+            <a href="/projects/index.html">Projects</a><span>/</span
+            ><span>RevenueLift — A/B Test Decision Platform</span>
+          </div>
+          <span class="tag"
+            >Data Analytics / BI · Experimentation · Case study</span
+          >
+          <h1>
+            A promising lift.<br /><span class="gradient"
+              >A narrower decision.</span
+            >
+          </h1>
+          <p class="lead">
+            A simulated checkout A/B test where a positive aggregate result did
+            not survive correction across multiple tests. The robust signal was
+            on mobile, with a page-speed guardrail to monitor.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#architecture-anchor"
+              >Explore the system ↓</a
+            ><a
+              class="btn"
+              href="https://github.com/Lahiru1Niroosh/revenuelift"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View repository ↗</a
+            >
+          </div>
+        </div>
+        <div class="cover">
+          <div class="cover-fallback">
+            <strong>RL</strong
+            ><span>RevenueLift — A/B Test Decision Platform cover</span>
+          </div>
+          <img decoding="async" width="1440" height="896"
+            src="/assets/revenuelift-cover.webp"
+            alt="RevenueLift — A/B Test Decision Platform project cover"
+            onerror="this.remove()"
+          />
+        </div>
+      </section>
+      <div class="shell statline">
+        <div class="stat rv">
+          <strong>+35.6%</strong><span>Mobile relative lift</span>
+        </div>
+        <div class="stat rv">
+          <strong>0.003</strong><span>Mobile adjusted p-value</span>
+        </div>
+        <div class="stat rv">
+          <strong>10 tests</strong><span>Multiple-testing correction</span>
+        </div>
+      </div>
+      
+      <section class="shell flow rv"><h2>From experiment to rollout decision</h2><p>The analysis moves from test design to a scoped recommendation.</p><div class="flow-track" style="--n:5"><div class="flow-step rv"><b>1</b><div><h3>Design</h3><p>Define the test and the metric</p></div></div><div class="flow-step rv"><b>2</b><div><h3>Power</h3><p>Check the sample can detect the effect</p></div></div><div class="flow-step rv"><b>3</b><div><h3>Test</h3><p>Significance on each comparison</p></div></div><div class="flow-step rv"><b>4</b><div><h3>Correct</h3><p>Adjust for multiple testing</p></div></div><div class="flow-step rv"><b>5</b><div><h3>Decide</h3><p>Roll out to mobile, test desktop apart</p></div></div></div></section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">The problem</span>
+              <h2>A raw p-value can push the wrong rollout.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            A simulated e-commerce checkout redesign appeared to improve
+            aggregate conversion with a raw p-value of 0.015. But the project
+            evaluated ten significance tests. After Benjamini–Hochberg
+            correction, the aggregate adjusted p-value was 0.050, while a mobile
+            segment still showed a robust effect. The decision had to account
+            for
+            <strong
+              >both statistical uncertainty and guardrail regressions</strong
+            >.
+          </p>
+        </div>
+      </section>
+      <section class="section" id="architecture-anchor">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Architecture</span>
+              <h2>From experiment design to a scoped rollout.</h2>
+            </div>
+            <p>The diagram shows how data moves through the project.</p>
+          </div>
+          <div
+            class="diagram rv"
+            role="img"
+            aria-label="Architecture: Power analysis to DuckDB to Python tests to BH correction to Power BI"
+          >
+            <svg viewBox="0 0 1020 440" aria-hidden="true">
+              <path class="track" d="M 195 219 H 227" />
+              <path
+                id="wire0"
+                class="wire"
+                pathLength="100"
+                d="M 195 219 H 227"
+                style="transition-delay: 0s"
+              />
+              <path class="track" d="M 367 219 H 399" />
+              <path
+                id="wire1"
+                class="wire"
+                pathLength="100"
+                d="M 367 219 H 399"
+                style="transition-delay: 0.19s"
+              />
+              <path class="track" d="M 539 219 H 571" />
+              <path
+                id="wire2"
+                class="wire"
+                pathLength="100"
+                d="M 539 219 H 571"
+                style="transition-delay: 0.38s"
+              />
+              <path class="track" d="M 711 219 H 743" />
+              <path
+                id="wire3"
+                class="wire"
+                pathLength="100"
+                d="M 711 219 H 743"
+                style="transition-delay: 0.57s"
+              />
+              <g class="node">
+                <rect x="55" y="170" width="140" height="98" rx="15" />
+                <text x="125" y="212">Power analysis</text>
+                <text class="sub" x="125" y="238">Plan sample size</text>
+              </g>
+              <g class="node">
+                <rect x="227" y="170" width="140" height="98" rx="15" />
+                <text x="297" y="212">DuckDB</text>
+                <text class="sub" x="297" y="238">Sessions + orders</text>
+              </g>
+              <g class="node">
+                <rect x="399" y="170" width="140" height="98" rx="15" />
+                <text x="469" y="212">Python tests</text>
+                <text class="sub" x="469" y="238">Segments + guardrails</text>
+              </g>
+              <g class="node">
+                <rect x="571" y="170" width="140" height="98" rx="15" />
+                <text x="641" y="212">BH correction</text>
+                <text class="sub" x="641" y="238">Ten tests</text>
+              </g>
+              <g class="node">
+                <rect x="743" y="170" width="140" height="98" rx="15" />
+                <text x="813" y="212">Power BI</text>
+                <text class="sub" x="813" y="238">Business decision</text>
+              </g>
+              <g class="moving">
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.0s" repeatCount="indefinite">
+                    <mpath href="#wire0" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.3s" repeatCount="indefinite">
+                    <mpath href="#wire1" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.6s" repeatCount="indefinite">
+                    <mpath href="#wire2" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.9s" repeatCount="indefinite">
+                    <mpath href="#wire3" />
+                  </animateMotion>
+                </circle>
+              </g>
+            </svg>
+            <div class="diagram-mobile">
+              <div>
+                <strong>Power analysis</strong><span>Plan sample size</span>
+              </div>
+              <div><strong>DuckDB</strong><span>Sessions + orders</span></div>
+              <div>
+                <strong>Python tests</strong><span>Segments + guardrails</span>
+              </div>
+              <div><strong>BH correction</strong><span>Ten tests</span></div>
+              <div><strong>Power BI</strong><span>Business decision</span></div>
+            </div>
+          </div>
+          <p class="diagram-note">
+            Python uses pandas, SciPy and statsmodels for analysis; DuckDB
+            stores simulated sessions and orders. Power BI presents the
+            resulting decision and guardrails.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Key decisions</span>
+              <h2>Why I built it this way.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Plan power first</h3>
+              <p>
+                Sample-size planning happened before generating the simulated
+                experiment data.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Correct for multiple tests</h3>
+              <p>
+                Benjamini–Hochberg adjustment changed the interpretation of the
+                aggregate result.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Check guardrails and segments</h3>
+              <p>
+                Refunds, tickets and page load time are assessed alongside
+                conversion, with explicit device and user-type segmentation.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Results</span>
+              <h2>Ship with caveats: mobile only.</h2>
+            </div>
+            <p>Scope and measurement matter as much as the headline numbers.</p>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>+35.6% mobile</h3>
+              <p>
+                Relative conversion lift in the mobile segment; adjusted
+                p=0.003.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Aggregate near-miss</h3>
+              <p>
+                Raw p=0.015, adjusted p=0.050 across the ten tests in this
+                analysis.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>+2.9% load time</h3>
+              <p>
+                The new flow significantly worsened page load time, p &lt;
+                0.0001, and needs monitoring.
+              </p>
+            </article>
+          </div>
+          <p class="note rv" style="margin-top: 20px">
+            <strong>Projected impact:</strong> The analysis estimates
+            approximately $857,401 in additional annual revenue for a
+            mobile-only rollout. It is an assumption-based projection from a
+            <strong>simulated experiment</strong>, not realized revenue. The
+            recommendation is to roll out to mobile, test desktop separately,
+            and monitor speed.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">What broke</span>
+              <h2>What I learned while building it.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Aggregate result changed</h3>
+              <p>
+                Multiple-testing correction turned a tempting headline win into
+                a statistical near-miss. The analysis changed the recommendation
+                rather than hiding the correction.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Guardrail regression</h3>
+              <p>
+                Page load time worsened under treatment; the decision report
+                calls for monitoring instead of focusing only on conversion.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Desktop uncertainty</h3>
+              <p>
+                The mobile effect should not be applied to desktop. A separate
+                desktop test is the next measurement step.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Limitations</span>
+              <h2>What this project does not claim.</h2>
+            </div>
+          </div>
+          <div class="note rv">
+            This is a <strong>simulated experiment</strong>. The revenue
+            projection depends on documented assumptions, and no live customer
+            behavior or realized revenue is claimed. Adjusted p=0.050 is a
+            boundary result whose interpretation depends on the pre-registered
+            criterion. Desktop needs an independent test, and mobile page-speed
+            regression needs monitoring.
+          </div>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Explore the work</span>
+              <h2>Code, report and next steps.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            The repository includes analysis scripts, methodology documents,
+            tests, a Power BI report and screenshots. The Power BI report is shared as screenshots and a .pbix file in the repository.
+          </p>
+          <div class="actions rv">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/Lahiru1Niroosh/revenuelift"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub repository ↗</a
+            ><a class="btn" href="/projects/index.html">All projects →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- site-footer -->
+  </body>
+</html>

@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b16" />
+  <meta
+    name="description"
+    content="DataGuard case study: a database reconciliation engine tested with injected faults and benchmarked against SQL EXCEPT."
+  />
+  <title>DataGuard Case Study | Lahiru Niroshan Sathsara</title>
+
+  </head>
+
+<body>
+  
+
+  
+  
+
+  <!-- site-header -->
+
+  <main>
+    <!-- CASE STUDY INTRO -->
+    <section class="shell hero">
+      <div>
+        <div class="breadcrumb">
+          <a href="/projects/index.html">Projects</a>
+          <span aria-hidden="true">/</span>
+          <span>DataGuard</span>
+        </div>
+
+        <span class="tag">Data engineering · Reliability · Case study</span>
+
+        <h1>Catch the drift <span class="gradient">before it spreads.</span></h1>
+
+        <p class="lead">
+          DataGuard compares a simulated core-banking database with a
+          downstream reporting replica. It checks partitions first, then
+          hashes rows where the cheap checks suggest a problem.
+        </p>
+
+        <div class="acts">
+          <a class="btn btn-p" href="#architecture">Explore the architecture ↓</a>
+          <a
+            class="btn btn-o"
+            href="https://github.com/Lahiru1Niroosh/dataguard-core"
+            target="_blank"
+            rel="noopener noreferrer"
+          >View core repository ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-cover">
+        <img decoding="async"
+          src="/assets/dataguard-cover.webp"
+          alt="Two database streams converging on a discrepancy detection system"
+          width="800"
+          height="600"
+        />
+        <span>Source → validation → evidence</span>
+      </div>
+    </section>
+
+    <div class="shell facts" aria-label="Project highlights">
+      <div class="fact">
+        <strong>100%</strong>
+        <span>Precision and recall on labeled, injected faults</span>
+      </div>
+      <div class="fact">
+        <strong>6.4×</strong>
+        <span>Faster at 1M rows than the naive SQL EXCEPT baseline</span>
+      </div>
+      <div class="fact">
+        <strong>13/13</strong>
+        <span>Automated pytest tests passing</span>
+      </div>
+      <div class="fact">
+        <strong>7/8</strong>
+        <span>Documented fault types classified</span>
+      </div>
+    </div>
+
+    <!-- PROBLEM -->
+    <section class="sec soft" id="problem">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">The problem</span>
+            <h2>Two databases can disagree quietly.</h2>
+          </div>
+        </div>
+
+        <p class="prose rv">
+          A source system and its reporting replica can diverge without a
+          single dramatic failure. Missing rows, duplicate records, null
+          changes, timestamp drift, and changed values can all affect
+          downstream reporting. DataGuard was built to find those
+          differences, classify them, and leave evidence someone can
+          investigate. The core-banking scenario and faults used here
+          are <strong>simulated</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="sec" id="architecture">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">Architecture</span>
+            <h2>Check cheaply. Investigate precisely.</h2>
+          </div>
+          <p>
+            Both datasets enter the same comparison path. Detailed row
+            hashing is reserved for partitions flagged by cheaper checks.
+          </p>
+        </div>
+
+        <div class="architecture rv" id="architectureDiagram">
+          <svg
+            class="arch-desktop"
+            viewBox="0 0 1000 460"
+            role="img"
+            aria-labelledby="diagramTitle diagramDesc"
+          >
+            <title id="diagramTitle">DataGuard reconciliation architecture</title>
+            <desc id="diagramDesc">
+              Simulated core-banking source and reporting replica feed
+              partition checks. Suspicious partitions move to row hashing,
+              then fault classification and a Streamlit insights dashboard.
+            </desc>
+
+            <!-- Faint tracks -->
+            <path class="flow-base" d="M230 116 H350 Q380 116 380 155 V215" />
+            <path class="flow-base" d="M230 340 H350 Q380 340 380 305 V245" />
+            <path class="flow-base" d="M530 230 H635" />
+            <path class="flow-base" d="M765 230 H850 V345 H715" />
+
+            <!-- Paths used for both line drawing and packets -->
+            <path
+              id="sourceFlow"
+              class="flow"
+              pathLength="100"
+              d="M230 116 H350 Q380 116 380 155 V215"
+            />
+            <path
+              id="replicaFlow"
+              class="flow blue"
+              pathLength="100"
+              d="M230 340 H350 Q380 340 380 305 V245"
+            />
+            <path
+              id="hashFlow"
+              class="flow delay"
+              pathLength="100"
+              d="M530 230 H635"
+            />
+            <path
+              id="insightsFlow"
+              class="flow amber later"
+              pathLength="100"
+              d="M765 230 H850 V345 H715"
+            />
+
+            <!-- Source -->
+            <g class="arch-node">
+              <rect x="20" y="64" width="210" height="104" rx="15" />
+              <text class="node-icon" x="125" y="98">01</text>
+              <text class="node-title" x="125" y="124">Source database</text>
+              <text class="node-sub" x="125" y="146">Simulated core banking</text>
+            </g>
+
+            <!-- Replica -->
+            <g class="arch-node">
+              <rect x="20" y="288" width="210" height="104" rx="15" />
+              <text class="node-icon" x="125" y="322">02</text>
+              <text class="node-title" x="125" y="348">Reporting replica</text>
+              <text class="node-sub" x="125" y="370">Downstream copy</text>
+            </g>
+
+            <!-- Cheap partition check -->
+            <g class="arch-node check">
+              <rect x="380" y="175" width="150" height="112" rx="15" />
+              <text class="node-icon" x="455" y="207">✓</text>
+              <text class="node-title" x="455" y="234">Partition checks</text>
+              <text class="node-sub" x="455" y="257">Flag suspected drift</text>
+            </g>
+
+            <!-- Targeted row hashing -->
+            <g class="arch-node hash">
+              <rect x="635" y="178" width="170" height="106" rx="15" />
+              <text class="node-icon" x="720" y="209">#</text>
+              <text class="node-title" x="720" y="237">Row hashing</text>
+              <text class="node-sub" x="720" y="259">Only where flagged</text>
+            </g>
+
+            <!-- Classification -->
+            <g class="arch-node output">
+              <rect x="525" y="315" width="190" height="95" rx="15" />
+              <text class="node-title" x="620" y="353">Classify differences</text>
+              <text class="node-sub" x="620" y="377">Evidence → Insights dashboard</text>
+            </g>
+
+            <text class="arch-note" x="585" y="206">Suspicious partitions only</text>
+
+            <!-- Moving packets -->
+            <g class="packets" aria-hidden="true">
+              <circle class="packet" r="5">
+                <animateMotion
+                  dur="3s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  begin="0s"
+                >
+                  <mpath href="#sourceFlow" />
+                </animateMotion>
+              </circle>
+
+              <circle class="packet blue" r="5">
+                <animateMotion
+                  dur="3s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  begin="1.1s"
+                >
+                  <mpath href="#replicaFlow" />
+                </animateMotion>
+              </circle>
+
+              <circle class="packet" r="5">
+                <animateMotion
+                  dur="2s"
+                  repeatCount="indefinite"
+                  begin="1.5s"
+                >
+                  <mpath href="#hashFlow" />
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
+
+          <!-- Clear version for narrow screens -->
+          <div class="arch-mobile" aria-label="DataGuard architecture">
+            <div class="mobile-sources">
+              <div class="mobile-step">
+                <strong>Source</strong>
+                <span>Simulated core-banking data</span>
+              </div>
+              <div class="mobile-step">
+                <strong>Replica</strong>
+                <span>Downstream reporting data</span>
+              </div>
+            </div>
+            <div class="mobile-arrow" aria-hidden="true"></div>
+            <div class="mobile-step">
+              <strong>Partition checks</strong>
+              <span>Identify suspected drift with cheaper comparisons</span>
+            </div>
+            <div class="mobile-arrow" aria-hidden="true"></div>
+            <div class="mobile-step">
+              <strong>Targeted row hashing</strong>
+              <span>Inspect flagged partitions in detail</span>
+            </div>
+            <div class="mobile-arrow" aria-hidden="true"></div>
+            <div class="mobile-step">
+              <strong>Classify and present</strong>
+              <span>Fault evidence feeds DataGuard Insights</span>
+            </div>
+          </div>
+
+          <div class="arch-caption">
+            <span><strong>Core:</strong> Python · PostgreSQL · xxhash · pandas/polars</span>
+            <span><strong>Insights:</strong> Neon Postgres · Streamlit · Plotly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY DECISIONS -->
+    <section class="sec soft" id="decisions">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">Key decisions</span>
+            <h2>Why it works this way.</h2>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <article class="card detail-card rv">
+            <span class="number">01</span>
+            <h3>Gate the expensive work</h3>
+            <p>
+              Partition-level checks run first. Row hashing runs only
+              when a partition looks suspicious, avoiding unnecessary
+              detailed comparisons.
+            </p>
+          </article>
+
+          <article class="card detail-card rv">
+            <span class="number">02</span>
+            <h3>Classify the difference</h3>
+            <p>
+              A mismatch should be actionable. DataGuard distinguishes
+              fault types so someone investigating a problem knows
+              what kind of drift occurred.
+            </p>
+          </article>
+
+          <article class="card detail-card rv">
+            <span class="number">03</span>
+            <h3>Separate engine and insights</h3>
+            <p>
+              DataGuard Core handles reconciliation. DataGuard Insights
+              provides the BI layer for exploring trends and risks
+              through a separate deployed dashboard.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="sec" id="results">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">Measured results</span>
+            <h2>Tested, not just described.</h2>
+          </div>
+          <p>
+            These results come from the project’s labeled synthetic
+            fault injections and benchmark runs.
+          </p>
+        </div>
+
+        <div class="results-grid">
+          <article class="card result rv">
+            <strong>100%</strong>
+            <h3>Precision and recall</h3>
+            <p>
+              Measured against labeled, injected faults in the
+              simulated source and replica datasets.
+            </p>
+          </article>
+
+          <article class="card result rv">
+            <strong>2.3× / 6.4×</strong>
+            <h3>Faster than the baseline</h3>
+            <p>
+              Compared with a naive SQL EXCEPT approach at 100K
+              and 1M rows respectively.
+            </p>
+          </article>
+
+          <article class="card result rv">
+            <strong>13 / 13</strong>
+            <h3>Automated tests passing</h3>
+            <p>
+              The project’s pytest suite passed all 13 documented tests.
+            </p>
+          </article>
+
+          <article class="card result rv">
+            <strong>7 / 8</strong>
+            <h3>Fault types classified</h3>
+            <p>
+              Seven documented fault types are classified. The eighth
+              remains a known limitation described below.
+            </p>
+          </article>
+        </div>
+
+        <p class="test-note rv">
+          <strong>Fault injection used for evaluation:</strong>
+          5 duplicate, 20 missing, 15 null, 20 timestamp, and
+          20 value-mismatch faults per run. The 100% figure refers
+          to this labeled test setup; it is not a claim about
+          production banking data.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHAT BROKE -->
+    <section class="sec soft" id="debugging">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">What broke</span>
+            <h2>Three bugs that changed the design.</h2>
+          </div>
+          <p>
+            The useful lessons came from testing the cases where the
+            first implementation failed.
+          </p>
+        </div>
+
+        <div class="grid3">
+          <article class="card debug-card rv">
+            <h3>Hashing ran too early</h3>
+            <p>
+              Row hashing was not gated by the cheaper partition checks.
+              The first version was slower than the naive baseline.
+              <strong>Fix:</strong> run detailed hashing only for
+              suspicious partitions.
+            </p>
+          </article>
+
+          <article class="card debug-card rv">
+            <h3>Null drift was missed</h3>
+            <p>
+              The partition suspicion check ignored null-count drift.
+              Recall fell to <strong>77% for one fault type</strong>.
+              <strong>Fix:</strong> include null-count differences
+              when deciding which partitions need deeper inspection.
+            </p>
+          </article>
+
+          <article class="card debug-card rv">
+            <h3>Duplicates looked missing</h3>
+            <p>
+              Duplicate rows were incorrectly classified as missing
+              rows. <strong>Fix:</strong> correct the classification
+              logic so the reported fault matches the evidence.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIMITATIONS -->
+    <section class="sec" id="limitations">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">Limitations</span>
+            <h2>What remains unfinished.</h2>
+          </div>
+        </div>
+
+        <div class="card limitation rv">
+          <h3>PARTITION_ANOMALY classification</h3>
+          <p>
+            The documented <code>PARTITION_ANOMALY</code> fault type
+            is not implemented. DataGuard classifies seven of the
+            eight documented fault types. The banking scenario is
+            simulated, so the benchmark and injected-fault results
+            should be understood in that test environment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section class="sec soft" id="links">
+      <div class="shell">
+        <div class="sh rv">
+          <div>
+            <span class="tag">Explore the work</span>
+            <h2>Inspect the code and dashboard.</h2>
+          </div>
+        </div>
+
+        <p class="prose rv">
+          The reconciliation engine and BI dashboard live in separate
+          repositories. The dashboard uses Neon Postgres and Streamlit
+          Cloud to present the findings.
+        </p>
+
+        <div class="next-links rv">
+          <a
+            class="btn btn-p"
+            href="https://github.com/Lahiru1Niroosh/dataguard-core"
+            target="_blank"
+            rel="noopener noreferrer"
+          >DataGuard Core ↗</a>
+
+          <a
+            class="btn btn-o"
+            href="https://github.com/Lahiru1Niroosh/dataguard-insights"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Insights repository ↗</a>
+
+          <a
+            class="btn btn-o"
+            href="https://dataguard-insights-cjf2jbrvhgsxpaup4zljkg.streamlit.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open live dashboard ↗</a>
+
+          <a class="btn btn-o" href="/projects/index.html">
+            All projects →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- site-footer -->
+</body>
+</html>

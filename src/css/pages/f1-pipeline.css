@@ -1,0 +1,235 @@
+.breadcrumb {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+.breadcrumb a:hover {
+  color: var(--mint);
+}
+.f1-hero {
+  padding-block: 56px 34px;
+}
+.f1-hero h1 {
+  max-width: 900px;
+}
+.f1-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 189, 124, 0.38);
+  border-radius: 999px;
+  color: var(--amber);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.f1-status::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+.f1-stats,
+.f1-grid,
+.f1-flow,
+.f1-phases {
+  display: grid;
+  gap: 14px;
+}
+.f1-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 16px auto 48px;
+}
+.f1-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.f1-card {
+  min-width: 0;
+  padding: 23px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(15, 23, 41, 0.82);
+}
+.f1-card h3 {
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+.f1-card p,
+.f1-card li,
+.f1-prose {
+  color: var(--muted);
+  line-height: 1.8;
+}
+.f1-card p {
+  margin: 0;
+}
+.f1-stat strong {
+  display: block;
+  color: var(--mint);
+  font:
+    800 clamp(1.7rem, 4vw, 2.8rem)/1.1 "Bricolage Grotesque",
+    sans-serif;
+}
+.f1-stat span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.f1-flow {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+.f1-branches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+.f1-branch {
+  padding: 20px;
+  border: 1px solid rgba(99, 234, 215, 0.25);
+  border-radius: 12px;
+  background: rgba(15, 23, 41, 0.8);
+}
+.f1-branch h3 {
+  margin: 0 0 7px;
+  font-size: 1.05rem;
+}
+.f1-branch p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.f1-step {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 110px;
+  padding: 16px;
+  border: 1px solid rgba(99, 234, 215, 0.25);
+  border-radius: 12px;
+  background: rgba(15, 23, 41, 0.8);
+  text-align: center;
+}
+.f1-step:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  z-index: 1;
+  color: var(--mint);
+  content: "→";
+  transform: translate(50%, -50%);
+}
+.f1-step strong {
+  display: block;
+}
+.f1-step span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.f1-phases {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.f1-phase {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.f1-phase strong {
+  display: block;
+}
+.f1-phase p {
+  margin: 4px 0 0;
+}
+.f1-phase-label {
+  flex: none;
+  min-width: 86px;
+  padding: 4px 8px;
+  border: 1px solid rgba(99, 234, 215, 0.26);
+  border-radius: 7px;
+  color: var(--mint);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-align: center;
+}
+.f1-phase-label.progress {
+  border-color: rgba(255, 189, 124, 0.4);
+  color: var(--amber);
+}
+.f1-phase-label.planned {
+  border-color: rgba(122, 168, 255, 0.4);
+  color: var(--blue);
+}
+.f1-note {
+  margin-top: 18px;
+  padding: 17px 20px;
+  border-left: 2px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  background: rgba(255, 189, 124, 0.07);
+  color: var(--muted);
+}
+.f1-note strong {
+  color: var(--text);
+}
+.f1-card ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+.f1-card li + li {
+  margin-top: 5px;
+}
+.f1-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+.f1-code {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  font:
+    0.86rem/1.65 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+.f1-warning {
+  border-color: rgba(255, 189, 124, 0.3);
+}
+@media (max-width: 800px) {
+  .f1-flow {
+    grid-template-columns: 1fr;
+  }
+  .f1-branches {
+    grid-template-columns: 1fr;
+  }
+  .f1-step {
+    min-height: auto;
+  }
+  .f1-step:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -17px;
+    content: "↓";
+    transform: translate(50%, 50%);
+  }
+}
+@media (max-width: 620px) {
+  .f1-stats,
+  .f1-grid,
+  .f1-phases {
+    grid-template-columns: 1fr;
+  }
+  .f1-hero {
+    padding-top: 38px;
+  }
+}

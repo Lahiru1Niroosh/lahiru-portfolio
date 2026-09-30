@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b16" />
+  <meta
+    name="description"
+    content="Case study of a Formula 1 data pipeline using OpenF1, Kafka, PostgreSQL, Spark, and Cassandra."
+  />
+  <title>F1 Real-Time Data Pipeline | Lahiru Niroshan Sathsara</title>
+  </head>
+<body data-page="case-study">
+  <div class="site-atmosphere" aria-hidden="true"></div>
+  <div class="site-progress" id="siteProgress" aria-hidden="true"></div>
+  <!-- site-header -->
+
+  <main>
+    <section class="site-shell page-hero f1-hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/projects/index.html">Projects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">F1 Real-Time Data Pipeline</span>
+      </nav>
+      <span class="tag">Data engineering · Streaming architecture · Case study</span>
+      <h1>From race data to <span class="gradient">queryable telemetry.</span></h1>
+      <p class="lead">
+        An end-to-end Formula 1 data pipeline: OpenF1 data enters Kafka, is
+        persisted in PostgreSQL, and is processed with Spark into Cassandra
+        for driver- and session-oriented lookups.
+      </p>
+      <span class="f1-status">In progress: orchestration and publication</span>
+      <div class="f1-actions">
+        <a class="btn btn-p" href="#architecture">Explore the architecture ↓</a>
+        <a class="btn btn-o" href="/projects/index.html">All projects →</a>
+      </div>
+    </section>
+
+    <section class="site-shell f1-stats" aria-label="Stored data">
+      <article class="f1-card f1-stat"><strong>30</strong><span>2024 sessions</span></article>
+      <article class="f1-card f1-stat"><strong>99</strong><span>Drivers</span></article>
+      <article class="f1-card f1-stat"><strong>4,119+</strong><span>Laps stored end to end</span></article>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">The problem</span>
+            <h2>Build a platform, not just a chart.</h2>
+          </div>
+        </div>
+        <p class="f1-prose">
+          The goal was to build the moving parts of a data platform: ingest a
+          continuous feed, keep the raw stream, serve two different access
+          patterns, and schedule the pipeline. Formula 1 offers realistic,
+          time-ordered data in a domain I care about.
+        </p>
+        <p class="f1-note">Built with OpenF1 data from the 2024 season. This is a streaming architecture; live-session latency has not been benchmarked.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="architecture">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Architecture</span>
+            <h2>One stream, two serving paths.</h2>
+          </div>
+          <p>Kafka decouples ingestion from the relational and streaming consumers.</p>
+        </div>
+        <div class="f1-flow" role="group" aria-label="Ingestion stages">
+          <div class="f1-step"><strong>OpenF1 API</strong><span>Race data source</span></div>
+          <div class="f1-step"><strong>producer.py</strong><span>Kafka producer</span></div>
+          <div class="f1-step"><strong>Kafka · KRaft</strong><span>f1_lap_data topic</span></div>
+        </div>
+        <div class="f1-branches" aria-label="Kafka consumers and sinks">
+          <article class="f1-branch">
+            <h3>consumer.py → PostgreSQL · f1_db</h3>
+            <p>Relational copy for ad hoc SQL queries and analysis.</p>
+          </article>
+          <article class="f1-branch">
+            <h3>Spark streaming → Cassandra · f1_data</h3>
+            <p>Two query-shaped tables, <code>lap_telemetry</code> and <code>race_gaps</code>, for fast driver and session reads. Writes are batched in groups of 50.</p>
+          </article>
+        </div>
+        <p class="f1-note"><strong>Batch processing:</strong>
+          Kafka decouples the producer from both consumers so either side can catch up independently.
+          Airflow orchestration is in progress; Superset and Grafana are planned.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Key decisions</span>
+            <h2>Designed around local constraints.</h2>
+          </div>
+        </div>
+        <div class="f1-grid">
+          <article class="f1-card"><h3>Kafka in KRaft mode</h3><p>Removes ZooKeeper as a service, reducing the stack footprint on an 8 GB laptop.</p></article>
+          <article class="f1-card"><h3>Two sinks, two access patterns</h3><p>PostgreSQL supports flexible SQL; Cassandra is shaped for fast key-based reads.</p></article>
+          <article class="f1-card"><h3>Batch Cassandra writes</h3><p>Writes 50 rows per batch instead of making one round trip per row.</p></article>
+          <article class="f1-card"><h3>Docker Compose stack</h3><p>Uses free, open-source tools and a custom Airflow image to include pipeline dependencies.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">What is built</span>
+            <h2>Working stages and open work.</h2>
+          </div>
+        </div>
+        <div class="f1-phases">
+          <article class="f1-card f1-phase"><span class="f1-phase-label">Complete</span><div><strong>Ingestion</strong><p>OpenF1 API → Kafka → PostgreSQL.</p></div></article>
+          <article class="f1-card f1-phase"><span class="f1-phase-label">Complete</span><div><strong>Processing</strong><p>Kafka → Spark → Cassandra.</p></div></article>
+          <article class="f1-card f1-phase"><span class="f1-phase-label progress">In progress</span><div><strong>Orchestration</strong><p>Airflow DAG.</p></div></article>
+          <article class="f1-card f1-phase"><span class="f1-phase-label planned">Planned</span><div><strong>Dashboards</strong><p>Superset and Grafana.</p></div></article>
+          <article class="f1-card f1-phase"><span class="f1-phase-label planned">Planned</span><div><strong>Publishing</strong><p>Free-tier cloud deployment.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Results</span>
+            <h2>What has been recorded.</h2>
+          </div>
+        </div>
+        <p class="f1-prose">The current stored dataset contains 30 sessions, 99 drivers, and more than 4,119 laps.</p>
+        <div class="f1-grid" style="margin-top:18px">
+          <article class="f1-card"><h3>Throughput</h3><p>Throughput benchmarking is planned.</p></article>
+          <article class="f1-card"><h3>End-to-end delay</h3><p>Producer-to-Cassandra delay has not been benchmarked.</p></article>
+          <article class="f1-card"><h3>Cross-sink reconciliation</h3><p>Cross-sink count and duplicate checks are planned.</p></article>
+        </div>
+        <p class="f1-note"><strong>Benchmarks are the next step:</strong> this page shows the architecture and the data it stores. It makes no throughput or latency claims.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">What broke, and how it was fixed</span>
+            <h2>Resource and runtime constraints shaped the pipeline.</h2>
+          </div>
+        </div>
+        <div class="f1-grid">
+          <article class="f1-card"><h3>Python 3.12 compatibility</h3><p><code>kafka-python</code> failed on Python 3.12; switched to <code>kafka-python-ng==2.2.3</code>.</p></article>
+          <article class="f1-card"><h3>Consumer polling stalled</h3><p>Replaced a for-loop consumer with an explicit poll loop.</p></article>
+          <article class="f1-card"><h3>Cassandra memory pressure</h3><p>Set a 1,500 MB container limit and a 768 MB heap to stabilize it.</p></article>
+          <article class="f1-card"><h3>Full-stack laptop memory</h3><p>Raised the WSL2 limit to 6 GB and treated memory as a design constraint.</p></article>
+          <article class="f1-card"><h3>Airflow dependencies</h3><p>The base image lacks pipeline packages; a custom image based on <code>apache/airflow:2.9.3</code> adds them. A custom image is the planned fix.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Limitations and next steps</span>
+            <h2>A local demonstration, not production resilience.</h2>
+          </div>
+        </div>
+        <article class="f1-card f1-warning">
+          <ul>
+            <li>Kafka and Cassandra are single-node deployments.</li>
+            <li>Duplicate handling and replay behavior have not been tested; no delivery guarantee is claimed.</li>
+            <li>Dashboards are not available yet.</li>
+            <li>The stack runs on a laptop and is not deployed in the cloud.</li>
+          </ul>
+          <h3 style="margin-top:20px">Next</h3>
+          <ol>
+            <li>Finish Airflow orchestration and schedule the pipeline.</li>
+            <li>Add Superset and Grafana dashboards.</li>
+            <li>Reconcile PostgreSQL against Cassandra, following the approach used in DataGuard.</li>
+            <li>Add producer tests and data-quality checks.</li>
+            <li>Publish the repository with an architecture diagram and screenshots.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Run it</span>
+            <h2>Local Docker Compose workflow.</h2>
+          </div>
+        </div>
+        <ol class="f1-prose">
+          <li>Start Docker, then run:</li>
+        </ol>
+        <code class="f1-code">docker compose -f docker/docker-compose.yml up -d</code>
+        <ol class="f1-prose" start="2">
+          <li>Wait about 90 seconds for Cassandra, then check <code>docker ps</code>.</li>
+          <li>Run <code>producer.py</code>, then <code>consumer.py</code>, then submit <code>processing/spark_streaming.py</code> with the Kafka package flags from the project notes.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="site-shell">
+        <div class="section-intro">
+          <div>
+            <span class="tag">Links and artifacts</span>
+            <h2>Verify publication details before sharing.</h2>
+          </div>
+        </div>
+        <p><a class="btn btn-p" href="https://github.com/Lahiru1Niroosh/F1-Real-Time-Data-Pipline" target="_blank" rel="noopener noreferrer">View repository ↗</a></p>
+        
+        <div class="f1-actions">
+          <a class="btn btn-o" href="/projects/index.html">All projects →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- site-footer -->
+</body>
+</html>

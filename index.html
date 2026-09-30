@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#070b16" />
+<meta name="description" content="Lahiru Niroshan Sathsara — former Oracle DBA building reliable data pipelines and analytics." />
+<meta property="og:title" content="Lahiru Niroshan Sathsara | Data Engineering Portfolio" />
+<meta property="og:image" content="/assets/lahiru-photo.jpg" />
+<title>Lahiru Niroshan Sathsara | Data Engineering Portfolio</title>
+</head>
+<body>
+
+
+
+<!-- site-header -->
+
+<main id="main">
+  <section class="shell hero" id="home">
+    <div>
+      <span class="chip-live fade"><i class="dot"></i>Open to data engineering, analytics and DBA roles</span>
+      <h1><span class="line"><span>Data you can</span></span><span class="line"><span>trust and use.</span></span></h1>
+      <p class="lead fade">I'm <strong>Lahiru Niroshan Sathsara</strong>. I administered production Oracle databases for core banking, and I build data projects around reliability, clear pipelines and useful analytics. I'm looking for <strong>data engineering</strong> and data analytics roles.</p>
+      <p class="typed-line fade">Right now: <b id="typed"></b><span class="caret"></span></p>
+      <div class="acts fade">
+        <a class="btn btn-p" href="#projects">See the projects ↗</a>
+        <a class="btn btn-o" href="/about.html">My story</a>
+        <a class="btn btn-o" href="/case-studies/index.html">Explore case studies ↗</a>
+      </div>
+    </div>
+    <div class="photo fade">
+      <div class="ring"></div>
+      <img decoding="async" src="/assets/lahiru-photo.jpg" alt="Portrait of Lahiru Niroshan Sathsara" width="400" height="460" fetchpriority="high" />
+      <span class="float a">Oracle DBA → Data engineer</span>
+      <span class="float b">Building reliable data systems</span>
+    </div>
+  </section>
+
+  <section class="shell stats" aria-label="Highlights">
+    <div class="stat rv"><strong data-count="4">0</strong><span>production servers administered</span></div>
+    <div class="stat rv"><strong data-count="6.4" data-dec="1" data-suffix="×">0</strong><span>faster than plain SQL at 1M rows (DataGuard)</span></div>
+    <div class="stat rv"><strong data-count="70000" data-suffix="+">0</strong><span>simulated orders analysed (Uber Eats project)</span></div>
+  </section>
+  <div class="marquee" aria-label="Technologies"><div class="marquee-track"><span class="mq"><img src="/assets/oracle.svg" alt="">Oracle</span><span class="mq"><img src="/assets/python.svg" alt="">Python</span><span class="mq"><img src="/assets/postgresql.svg" alt="">PostgreSQL</span><span class="mq"><img src="/assets/kafka.svg" alt="">Kafka</span><span class="mq"><img src="/assets/docker.svg" alt="">Docker</span><span class="mq"><img src="/assets/duckdb.svg" alt="">DuckDB</span><span class="mq"><img src="/assets/streamlit.svg" alt="">Streamlit</span><span class="mq"><img src="/assets/pandas.svg" alt="">Pandas</span><span class="mq"><img src="/assets/powerbi.svg" alt="">Power BI</span><span class="mq"><img src="/assets/spark.svg" alt="">Spark</span><span class="mq"><img src="/assets/sql.svg" alt="">SQL</span><span class="mq"><img src="/assets/git.svg" alt="">Git</span></div></div>
+
+  <section class="shell sec" id="projects">
+    <div class="sh rv"><div><span class="tag">Selected work</span><h2 style="margin-top:14px">Projects with a purpose.</h2></div>
+      <p>Streaming, reconciliation, controls and analytics. The data is simulated; the engineering and measurements are real.</p></div>
+
+    <!-- F1 FIRST -->
+    <article class="card f1 rv tilt">
+      <div class="pb">
+        <div><span class="tag">Streaming</span> <span class="tag">Data engineering</span><span class="wip"><i></i>In development</span></div>
+        <h3>F1 Real-Time Data Pipeline</h3>
+        <p>An OpenF1-fed streaming architecture stores race data in PostgreSQL and processes Kafka events with Spark into Cassandra. Airflow orchestration is in progress; dashboards are planned.</p>
+        <div class="metrics"><span class="m">4,119+ laps stored</span><span class="m">Spark → Cassandra complete</span><span class="m">Airflow in progress</span></div>
+        <p class="stack">OpenF1 · Kafka · PostgreSQL · Spark · Cassandra · Airflow</p>
+        <div class="links"><a href="/projects/f1-pipeline.html">Read case study ↗</a></div>
+      </div>
+      <div class="viz" role="img" aria-label="OpenF1 data flows through Kafka to PostgreSQL and Spark, with Spark writing to Cassandra. Airflow is in progress and dashboards are planned.">
+        <svg viewBox="0 0 470 250">
+          <path class="tr on" d="M105 125 H160"/><path class="tr on" d="M250 125 C300 125 300 45 350 45"/>
+          <path class="tr on" d="M250 125 H350"/><path class="tr on" d="M405 152 V178"/>
+          <g class="n on"><rect x="10" y="95" width="95" height="60" rx="12"/><text x="57" y="122">OpenF1</text><text class="s" x="57" y="140">data</text></g>
+          <g class="n on"><rect x="160" y="95" width="90" height="60" rx="12"/><text x="205" y="122">Kafka</text><text class="s" x="205" y="140">ingestion</text></g>
+          <g class="n on"><rect x="350" y="18" width="110" height="54" rx="12"/><text x="405" y="42">PostgreSQL</text><text class="s" x="405" y="58">complete</text></g>
+          <g class="n on"><rect x="350" y="98" width="110" height="54" rx="12"/><text x="405" y="122">Spark</text><text class="s" x="405" y="138">streaming</text></g>
+          <g class="n on"><rect x="350" y="178" width="110" height="54" rx="12"/><text x="405" y="202">Cassandra</text><text class="s" x="405" y="218">complete</text></g>
+          <circle r="5" fill="#ffbd7c"><animateMotion dur="3s" repeatCount="indefinite" path="M10 125 H205 H250 C300 125 300 45 350 45"/></circle>
+          <circle r="5" fill="#63ead7"><animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M10 125 H205 H350"/></circle>
+          <circle r="5" fill="#7aa8ff"><animateMotion dur="3s" begin="2s" repeatCount="indefinite" path="M10 125 H205 H350 V205"/></circle>
+        </svg>
+        <div class="legend"><span><b></b>built</span><span>Airflow in progress · dashboards planned</span></div>
+      </div>
+    </article>
+
+    <div class="grid3">
+      <article class="card dg rv tilt">
+        <img decoding="async" width="1586" height="992" class="cover" src="/assets/dataguard-cover.webp" alt="Two data streams being checked for discrepancies" loading="lazy" />
+        <div class="pb">
+          <div><span class="tag">Data engineering</span> <span class="tag">Reliability</span></div>
+          <h3>DataGuard</h3>
+          <p>Reconciles a simulated core-banking database against its reporting replica. Cheap partition checks run first, and row hashing only runs where drift is suspected.</p>
+          <div class="metrics"><span class="m">100% precision and recall on injected faults</span><span class="m">6.4× at 1M rows</span><span class="m">13/13 tests</span></div>
+          <p class="stack">Python · PostgreSQL · Docker · Streamlit</p>
+          <div class="links"><a href="/projects/dataguard.html">Read case study ↗</a><a href="https://github.com/Lahiru1Niroosh/dataguard-insights" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+        </div>
+      </article>
+
+      <article class="card rv tilt">
+        <img decoding="async" width="1440" height="896" class="cover" src="/assets/billing-assurance-cover.webp" alt="Billing assurance and revenue protection visual" loading="lazy" />
+        <div class="pb">
+          <div><span class="tag">Data controls</span> <span class="tag">Analytics</span></div>
+          <h3>Billing Assurance</h3>
+          <p>A control tower for billing exceptions, discount decisions, SLA monitoring and customer risk, backed by a DuckDB warehouse.</p>
+          <p class="stack">Python · DuckDB · SQL · Streamlit</p>
+          <div class="links"><a href="https://billing-assurance-control-tower-demo.streamlit.app/Billing_Integrity" target="_blank" rel="noopener noreferrer">Live demo ↗</a><a href="/projects/index.html">Details ↗</a></div>
+        </div>
+      </article>
+
+      <article class="card rv tilt">
+        <img decoding="async" width="1586" height="992" class="cover" src="/assets/uber-eats-cover.webp" alt="Food delivery analytics dashboard visual" loading="lazy" />
+        <div class="pb">
+          <div><span class="tag">Analytics</span> <span class="tag">Machine learning</span></div>
+          <h3>Uber Eats Sri Lanka</h3>
+          <p>Synthetic marketplace data used to explore orders, pricing, restaurant performance, driver operations and churn risk.</p>
+          <p class="stack">Python · SQLite · Scikit-learn · Streamlit</p>
+          <div class="links"><a href="https://uber-eats-sl-analytics-project-here.streamlit.app/" target="_blank" rel="noopener noreferrer">Live demo ↗</a><a href="https://github.com/Lahiru1Niroosh/uber-eats-sl-analytics-Project" target="_blank" rel="noopener noreferrer">Repository ↗</a></div>
+        </div>
+      </article>
+    </div>
+    <p style="margin-top:28px"><a class="btn btn-o" href="/projects/index.html">Browse all projects ↗</a></p>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="shell sec">
+      <div class="sh rv"><div><span class="tag">What I bring</span><h2 style="margin-top:14px">Skills across the <span class="grad-text">data stack.</span></h2></div>
+        <p>Grouped by the job they do. What I'm still learning is kept separate on purpose.</p></div>
+      <div class="sg">
+        <div class="grp rv"><h3>Store and protect</h3><p>Where the data lives</p><div class="tiles"><span class="tile"><img src="/assets/oracle.svg" alt="" loading="lazy"><b>Oracle</b></span><span class="tile"><img src="/assets/postgresql.svg" alt="" loading="lazy"><b>PostgreSQL</b></span><span class="tile"><img src="/assets/sql.svg" alt="" loading="lazy"><b>SQL</b></span><span class="tile"><img src="/assets/duckdb.svg" alt="" loading="lazy"><b>DuckDB</b></span></div></div>
+        <div class="grp rv"><h3>Move and transform</h3><p>How it gets where it is going</p><div class="tiles"><span class="tile"><img src="/assets/python.svg" alt="" loading="lazy"><b>Python</b></span><span class="tile"><img src="/assets/pandas.svg" alt="" loading="lazy"><b>Pandas</b></span><span class="tile"><img src="/assets/kafka.svg" alt="" loading="lazy"><b>Kafka</b></span></div></div>
+        <div class="grp rv"><h3>Ship and show</h3><p>How people see it</p><div class="tiles"><span class="tile"><img src="/assets/docker.svg" alt="" loading="lazy"><b>Docker</b></span><span class="tile"><img src="/assets/streamlit.svg" alt="" loading="lazy"><b>Streamlit</b></span><span class="tile"><img src="/assets/powerbi.svg" alt="" loading="lazy"><b>Power BI</b></span><span class="tile"><img src="/assets/git.svg" alt="" loading="lazy"><b>Git</b></span></div></div>
+        <div class="grp next rv"><h3>Learning next</h3><p>On the roadmap</p><div class="tiles"><span class="tile"><img src="/assets/apacheairflow.svg" alt="" loading="lazy"><b>Airflow</b></span><span class="tile"><img src="/assets/spark.svg" alt="" loading="lazy"><b>Spark</b></span><span class="tile"><img src="/assets/cassandra.svg" alt="" loading="lazy"><b>Cassandra</b></span><span class="tile"><img src="/assets/dbt.svg" alt="" loading="lazy"><b>dbt</b></span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell sec" id="services">
+    <div class="sh rv"><div><span class="tag">What I can do</span><h2 style="margin-top:14px">Where I add <span class="grad-text">value.</span></h2></div>
+      <p>Four things I can take on from day one, each backed by a project you can open.</p></div>
+    <div class="svc-grid">
+      <article class="svc rv"><i>⚙</i><h3>Reliable pipelines</h3><p>Ingest, store and process data with Kafka, Spark, PostgreSQL and Docker, built to run end to end.</p><small>See: F1 Real-Time Pipeline</small></article>
+      <article class="svc rv"><i>✓</i><h3>Data quality and reconciliation</h3><p>Find silent drift between systems, classify it, and leave evidence someone can act on.</p><small>See: DataGuard</small></article>
+      <article class="svc rv"><i>▦</i><h3>Dashboards and reporting</h3><p>Turn tables into decisions with Streamlit, Power BI and DuckDB, with metrics defined once.</p><small>See: Billing Assurance, Uber Eats</small></article>
+      <article class="svc rv"><i>🛡</i><h3>Database administration</h3><p>Oracle 19c/24ai on production servers: backup and restore with RMAN, query tuning, monitoring scripts.</p><small>Experience: VS Information Systems</small></article>
+    </div>
+  </section>
+
+  <section class="skills" id="process">
+    <div class="shell sec">
+      <div class="sh rv"><div><span class="tag">How I work</span><h2 style="margin-top:14px">Four habits from <span class="grad-text">production.</span></h2></div>
+        <p>Working on live banking databases taught me to trust data only after checking it.</p></div>
+      <div class="steps">
+        <div class="step rv"><b>1</b><h3>Understand the source</h3><p>Where the data comes from, who depends on it, and what a bad day looks like.</p></div>
+        <div class="step rv"><b>2</b><h3>Validate early</h3><p>Checks at each hop, so problems are caught where they start.</p></div>
+        <div class="step rv"><b>3</b><h3>Build and automate</h3><p>Containerised, repeatable, and easy to rerun after a failure.</p></div>
+        <div class="step rv"><b>4</b><h3>Explain the result</h3><p>Clear numbers, stated limits, and notes the next person can follow.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell sec ab">
+    <div class="rv"><span class="tag">A little about me</span><h2 style="margin-top:14px">From keeping databases running to building what runs on them.</h2></div>
+    <div class="rv">
+      <p>I started in IT support, then administered production Oracle systems supporting core banking. That shaped how I build: <strong>check the data, understand what can fail, and make the results useful.</strong> My next step is data engineering, with analytics built on top.</p>
+      <div class="acts"><a class="btn btn-o" href="/about.html">Read my story ↗</a></div>
+    </div>
+  </section>
+<section class="shell sec"><div class="cta rv"><h2>Need someone who checks the <span class="grad-text">data first?</span></h2><p>I'm looking for data engineering, analytics and database roles. Send a message, or take my CV with you.</p><div class="row"><a class="cbtn p" href="/contact/index.html">Get in touch ↗</a><a class="cbtn" href="/assets/Lahiru_Niroshan_Sathsara_CV.pdf" download>Download CV ↓</a><a class="cbtn" href="/case-studies/index.html">Read the case studies</a></div></div></section>
+</main>
+
+<!-- site-footer -->
+</body>
+</html>

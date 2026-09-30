@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b16" />
+  <meta
+    name="description"
+    content="Data engineering, analytics, AI and application projects by Lahiru Niroshan Sathsara."
+  />
+  <title>Projects | Lahiru Niroshan Sathsara</title>
+
+  </head>
+
+<body>
+  
+
+  
+  
+
+  <!-- site-header -->
+
+  <main>
+    <section class="shell hero">
+      <span class="tag">Selected and independent work</span>
+      <h1>Ideas built into <span class="gradient">working systems.</span></h1>
+      <p class="lead">
+        Explore projects across data engineering, analytics, AI, and
+        application development. Each card tells you what the project
+        does, the tools behind it, and where to inspect the work.
+      </p>
+
+      <div class="hero-stats">
+        <span class="hero-stat"><strong>Data engineering</strong> · pipelines and reliability</span>
+        <span class="hero-stat"><strong>Analytics</strong> · dashboards and decisions</span>
+        <span class="hero-stat"><strong>AI / ML</strong> · applied models</span>
+        <span class="hero-stat"><strong>Web / Apps</strong> · working products</span>
+      </div>
+    </section>
+
+    <div class="filter-wrap">
+      <div class="shell filters" role="group" aria-label="Filter projects by category">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">
+          All <span class="filter-count" id="count-all"></span>
+        </button>
+        <button class="filter" type="button" data-filter="engineering" aria-pressed="false">
+          Data Engineering <span class="filter-count" id="count-engineering"></span>
+        </button>
+        <button class="filter" type="button" data-filter="analytics" aria-pressed="false">
+          Data Analytics / BI <span class="filter-count" id="count-analytics"></span>
+        </button>
+        <button class="filter" type="button" data-filter="ai" aria-pressed="false">
+          AI / ML <span class="filter-count" id="count-ai"></span>
+        </button>
+        <button class="filter" type="button" data-filter="web" aria-pressed="false">
+          Web / Apps <span class="filter-count" id="count-web"></span>
+        </button>
+        <span class="results-count" id="resultsCount" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <section class="shell sec" aria-label="Project gallery">
+      <div class="project-grid" id="projectGrid"></div>
+      <p class="empty" id="emptyState">No projects in this category yet.</p>
+    </section>
+  </main>
+
+  <!-- site-footer -->
+</body>
+</html>

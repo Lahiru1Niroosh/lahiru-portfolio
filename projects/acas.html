@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#070b16" />
+    <meta
+      name="description"
+      content="ACAS case study: privacy-first orchestration for a multimodal credibility assessment research project."
+    />
+    <title>
+      ACAS — Automated Credibility Assessment System | Lahiru Niroshan Sathsara
+    </title>
+    </head>
+  <body>
+    
+    
+    <!-- site-header -->
+    <main>
+      <section class="shell hero">
+        <div>
+          <div class="crumb">
+            <a href="/projects/index.html">Projects</a><span>/</span
+            ><span>ACAS — Automated Credibility Assessment System</span>
+          </div>
+          <span class="tag"
+            >AI / ML · Academic group research · Case study</span
+          >
+          <h1>Privacy before<br /><span class="gradient">prediction.</span></h1>
+          <p class="lead">
+            A four-agent research pipeline for social media credibility
+            assessment. My contribution was the privacy layer, orchestration,
+            routing, audit records and API integration; teammates developed the
+            classification and similarity models.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#architecture-anchor"
+              >Explore the system ↓</a
+            ><a
+              class="btn"
+              href="https://github.com/Lahiru1Niroosh/acas-social-media"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View repository ↗</a
+            >
+          </div>
+        </div>
+        <div class="cover">
+          <div class="cover-fallback">
+            <strong>AC</strong
+            ><span>ACAS — Automated Credibility Assessment System cover</span>
+          </div>
+          <img decoding="async" width="1440" height="804"
+            src="/assets/acas-cover.webp"
+            alt="ACAS — Automated Credibility Assessment System project cover"
+            onerror="this.remove()"
+          />
+        </div>
+      </section>
+      <div class="shell statline">
+        <div class="stat rv">
+          <strong>4 agents</strong><span>PII → text → image → fusion</span>
+        </div>
+        <div class="stat rv">
+          <strong>3 input modes</strong><span>Text, image or both</span>
+        </div>
+        <div class="stat rv">
+          <strong>Group research</strong
+          ><span>My contribution clearly identified</span>
+        </div>
+      </div>
+      
+      <section class="shell flow rv"><h2>How a post travels through ACAS</h2><p>Privacy is handled before anything else sees the content.</p><div class="flow-track" style="--n:5"><div class="flow-step rv"><b>1</b><div><h3>Post submitted</h3><p>A claim arrives through the API</p></div></div><div class="flow-step rv"><b>2</b><div><h3>Privacy masking</h3><p>Personal details are removed first</p></div></div><div class="flow-step rv"><b>3</b><div><h3>Controller routing</h3><p>The request goes to the right agents</p></div></div><div class="flow-step rv"><b>4</b><div><h3>Credibility and similarity</h3><p>Specialist agents assess the claim</p></div></div><div class="flow-step rv"><b>5</b><div><h3>Audit record</h3><p>Each decision is stored for review</p></div></div></div></section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">The problem</span>
+              <h2>Credibility checks can expose the people being checked.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            Social media posts contain both content to assess and personal
+            metadata that should not be sent through every model. ACAS was
+            designed to route text-only, image-only and multimodal posts through
+            a sequential assessment while
+            <strong>masking user metadata before analysis</strong>. This was a
+            group final-year research project at SLIIT.
+          </p>
+        </div>
+      </section>
+      <section class="section" id="architecture-anchor">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Architecture</span>
+              <h2>Privacy is the first stage, every time.</h2>
+            </div>
+            <p>The diagram shows how data moves through the project.</p>
+          </div>
+          <div
+            class="diagram rv"
+            role="img"
+            aria-label="Architecture: Post input to PIIAgent to Model agents to Fusion to Verdict"
+          >
+            <svg viewBox="0 0 1020 440" aria-hidden="true">
+              <path class="track" d="M 195 219 H 227" />
+              <path
+                id="wire0"
+                class="wire"
+                pathLength="100"
+                d="M 195 219 H 227"
+                style="transition-delay: 0s"
+              />
+              <path class="track" d="M 367 219 H 399" />
+              <path
+                id="wire1"
+                class="wire"
+                pathLength="100"
+                d="M 367 219 H 399"
+                style="transition-delay: 0.19s"
+              />
+              <path class="track" d="M 539 219 H 571" />
+              <path
+                id="wire2"
+                class="wire"
+                pathLength="100"
+                d="M 539 219 H 571"
+                style="transition-delay: 0.38s"
+              />
+              <path class="track" d="M 711 219 H 743" />
+              <path
+                id="wire3"
+                class="wire"
+                pathLength="100"
+                d="M 711 219 H 743"
+                style="transition-delay: 0.57s"
+              />
+              <g class="node">
+                <rect x="55" y="170" width="140" height="98" rx="15" />
+                <text x="125" y="212">Post input</text>
+                <text class="sub" x="125" y="238">Text, image, or both</text>
+              </g>
+              <g class="node">
+                <rect x="227" y="170" width="140" height="98" rx="15" />
+                <text x="297" y="212">PIIAgent</text>
+                <text class="sub" x="297" y="238">Mandatory masking</text>
+              </g>
+              <g class="node">
+                <rect x="399" y="170" width="140" height="98" rx="15" />
+                <text x="469" y="212">Model agents</text>
+                <text class="sub" x="469" y="238">RoBERTa + CNN</text>
+              </g>
+              <g class="node">
+                <rect x="571" y="170" width="140" height="98" rx="15" />
+                <text x="641" y="212">Fusion</text>
+                <text class="sub" x="641" y="238">CLIP + OCR</text>
+              </g>
+              <g class="node">
+                <rect x="743" y="170" width="140" height="98" rx="15" />
+                <text x="813" y="212">Verdict</text>
+                <text class="sub" x="813" y="238">Explanation + audit</text>
+              </g>
+              <g class="moving">
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.0s" repeatCount="indefinite">
+                    <mpath href="#wire0" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.3s" repeatCount="indefinite">
+                    <mpath href="#wire1" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.6s" repeatCount="indefinite">
+                    <mpath href="#wire2" />
+                  </animateMotion>
+                </circle>
+                <circle class="pulse" r="4">
+                  <animateMotion dur="2s" begin="0.9s" repeatCount="indefinite">
+                    <mpath href="#wire3" />
+                  </animateMotion>
+                </circle>
+              </g>
+            </svg>
+            <div class="diagram-mobile">
+              <div>
+                <strong>Post input</strong><span>Text, image, or both</span>
+              </div>
+              <div><strong>PIIAgent</strong><span>Mandatory masking</span></div>
+              <div><strong>Model agents</strong><span>RoBERTa + CNN</span></div>
+              <div><strong>Fusion</strong><span>CLIP + OCR</span></div>
+              <div>
+                <strong>Verdict</strong><span>Explanation + audit</span>
+              </div>
+            </div>
+          </div>
+          <p class="diagram-note">
+            The diagram summarizes a group-built pipeline. I designed the
+            PIIAgent, controller, routing, audit architecture and /verify
+            integration. Teammates developed the text, image and multimodal
+            models.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Key decisions</span>
+              <h2>Why I built it this way.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Make privacy non-skippable</h3>
+              <p>
+                The controller runs PIIAgent before the model stages so user
+                metadata is masked before AI processing.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Route by available input</h3>
+              <p>
+                Text-only, image-only and multimodal posts follow applicable
+                stages through a shared orchestration interface.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Keep raw and masked evidence distinct</h3>
+              <p>
+                MongoDB collections <code>tweets_raw</code> and
+                <code>pii_audit</code> record the input and privacy
+                transformation for review.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Results</span>
+              <h2>What was delivered.</h2>
+            </div>
+            <p>Scope and measurement matter as much as the headline numbers.</p>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Orchestrated pipeline</h3>
+              <p>
+                CrewAI controller enforcing agent order and plugging team-built
+                models into a common flow.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Privacy layer</h3>
+              <p>
+                PIIAgent masks username, name, location and profile-image
+                metadata before analysis.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>API and records</h3>
+              <p>
+                FastAPI <code>/verify</code> endpoint, Pydantic schemas and
+                MongoDB audit collections.
+              </p>
+            </article>
+          </div>
+          <p class="note rv" style="margin-top: 20px">
+            <strong>Measurement:</strong> This page focuses on the architecture and privacy controls. It does not report model accuracy, precision, recall or latency.
+          </p>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">What broke</span>
+              <h2>What I learned while building it.</h2>
+            </div>
+          </div>
+          <div class="grid">
+            <article class="card rv">
+              <span class="num">01</span>
+              <h3>Integration boundaries</h3>
+              <p>
+                Four independently developed components needed a shared
+                controller and plug-and-play interface. The lesson was to agree one shared interface early, so each component can be swapped without rewriting the controller.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">02</span>
+              <h3>Audit visibility</h3>
+              <p>
+                Raw and masked records were separated to make the privacy
+                transformation inspectable. Access controls for those records
+                are not documented.
+              </p>
+            </article>
+            <article class="card rv">
+              <span class="num">03</span>
+              <h3>Model delivery</h3>
+              <p>
+                Large model weight files are excluded from the public
+                repository; local reproduction requires the weights or
+                retraining instructions.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Limitations</span>
+              <h2>What this project does not claim.</h2>
+            </div>
+          </div>
+          <div class="note rv">
+            This is an <strong>academic group project</strong>. The repository
+            omits large model weights and does not publish benchmark metrics yet. Docker deployment, live social-media ingestion,
+            multilingual support and a browser extension are listed as future
+            work. Masked PII and raw audit records require careful access
+            control in any real deployment.
+          </div>
+        </div>
+      </section>
+      <section class="section soft">
+        <div class="shell">
+          <div class="heading rv">
+            <div>
+              <span class="tag">Explore the work</span>
+              <h2>Code, report and next steps.</h2>
+            </div>
+          </div>
+          <p class="prose rv">
+            The repository contains the orchestration code and project setup.
+            The work was developed for a conference-paper submission; no
+            publication acceptance is claimed.
+          </p>
+          <div class="actions rv">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/Lahiru1Niroosh/acas-social-media"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub repository ↗</a
+            ><a class="btn" href="/projects/index.html">All projects →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- site-footer -->
+  </body>
+</html>

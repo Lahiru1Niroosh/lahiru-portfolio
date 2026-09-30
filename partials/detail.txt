@@ -1,0 +1,176 @@
+# VS Code Copilot prompt: portfolio redesign and fixes
+
+**How to use it**
+1. Open the project folder in VS Code and switch Copilot Chat to **Agent mode**.
+2. Attach these files to the chat: `vite.config.js`, `src/style.css`, `src/main.js`, `partials/header.html`, `partials/footer.html`.
+3. Fill in the `CONFIG` block (section 1) or leave the marked gaps. Copilot must never guess them.
+4. Paste everything from "PROMPT START" to the end. Run it phase by phase: say "continue" only after the build passes and you have checked the pages.
+5. Before Oct 6, 2026, download the certificate images (see Phase 3). Your current image links expire that week.
+
+---
+
+## PROMPT START
+
+You are a senior front-end engineer and UI/UX designer working on my personal portfolio: a **Vite multi-page static site** (no framework). The audience is recruiters and hiring managers for **data engineering, data analytics, BI and DBA roles**. Work in the phases below. After each phase run `npm run build`, fix every error, and report what changed before starting the next phase. Do not skip ahead.
+
+### 1. CONFIG (use only these values; if a value says TODO, leave a visible `TODO` marker and list it in your report)
+
+**Contact**
+- Email: lahirusathsara671@gmail.com
+- Phone: +94 76 154 5631 (link `tel:+94761545631`)
+- WhatsApp: https://wa.me/94761545631
+- LinkedIn: https://www.linkedin.com/in/lahiru-niroshan/
+- GitHub: https://github.com/Lahiru1Niroosh/
+- CV: /assets/Lahiru_Niroshan_Sathsara_CV.pdf
+- Location: Sri Lanka (GMT+5:30)
+- Contact form endpoint (Formspree or Web3Forms): TODO
+- Typical reply time: TODO
+
+**Roles (About page)**
+- Database Administrator, VS Information Systems: start Apr 2025. End date display: no need end date just only show the start date
+- IT Support Engineer, NDB Securities: currently shows "Apr 2025 – Jul 2025 · Contract". **TODO: 3 monthes contract**
+- Sales Executive, FlyLanka: Aug 2023 – Aug 2024 · Contract
+
+**Live links**
+- DataGuard Insights demo: https://dataguard-insights-cjf2jbrvhgsxpaup4zljkg.streamlit.app/
+- Billing Assurance demo: https://billing-assurance-control-tower-demo.streamlit.app/Billing_Integrity
+- Uber Eats demo: https://uber-eats-sl-analytics-project-here.streamlit.app/
+- F1 repo: https://github.com/Lahiru1Niroosh/F1-Real-Time-Data-Pipline (TODO: confirm the spelling and that it is public)
+
+**F1 project status (single source of truth):** Kafka ingestion to PostgreSQL complete; Spark-to-Cassandra streaming complete; Airflow in progress; dashboards planned. Producer source mode and Airflow custom-image status remain unconfirmed. Use the confirmed status on every page.
+
+**Certifications** (keep these; add only ones I confirm; never add expired ones)
+| Title | Issuer | Issued |
+|---|---|---|
+| Building a Highly Available, Scalable Web Application | AWS | Oct 2025 |
+| AWS SimuLearn: Core Security Concepts | AWS | Oct 2025 |
+| AWS SimuLearn: Databases in Practice | AWS | Sep 2025 |
+| Configure Azure Blob Storage | Microsoft | Aug 2025 |
+| Oracle Fusion AI Agent Studio Foundations Associate – Rel 1 | Oracle | Jul 2025 |
+| Oracle Cloud Infrastructure 2025 Certified Foundations Associate | Oracle | Jul 2025 |
+
+Real verification URL and credential ID for each: https://www.linkedin.com/in/lahiru-niroshan/details/certifications/.
+
+**Articles (LinkedIn)**
+1. "Designing for Resilience: The Core Pillars of Modern Production Database Architecture": https://www.linkedin.com/pulse/designing-worst-case-scenario-core-pillars-modern-lahiru-niroshan-jvf0c/
+2. "Why Linux Is a Must-Have Skill for Every Data Engineer (and How I'm Learning It)": https://www.linkedin.com/pulse/why-linux-must-have-skill-every-data-engineer-how-im-niroshan--nslqc/
+Publish dates and reading times: TODO.
+
+### 2. Rules (apply to everything)
+- **Never invent facts, numbers, dates, links, testimonials or achievements.** Use CONFIG only. If something is missing, add a visible `TODO` and list it in your report.
+- Label simulated or synthetic data wherever results are shown.
+- Keep the existing look: dark theme, tokens `--bg:#070b16 --panel:#0f1729 --line:rgba(255,255,255,.09) --text:#eef3ff --muted:#9aa8c2 --mint:#63ead7 --blue:#7aa8ff --amber:#ffbd7c`; fonts Bricolage Grotesque (headings) and Figtree (body). Improve it, but do not change the identity.
+- Animate only `transform` and `opacity`. Every animation must respect `prefers-reduced-motion`. Cursor effects run only when `(hover:hover)` matches. No animation libraries, no particle backgrounds, no custom cursors, no scroll-jacking.
+- Accessible by default: semantic landmarks, visible focus, 44px touch targets, alt text, `aria-current`, keyboard operable menu, filters and lightbox.
+- Plain, readable code. Comment only non-obvious decisions.
+
+### 3. What I found in the scan (fix all of it)
+
+**A. Broken layout on Contact, Certifications + Articles and Case Studies pages.** These pages use classes `.shell`, `.sec` and `.fx`, but those are defined only inside the inline `<style>` blocks of other pages. `src/style.css` defines only `.site-shell`. Result: content sits flush against the left edge with no max-width, no padding. Also `<h1>` gradients wrap awkwardly.
+
+**B. The header shows no contact details.** `vite.config.js` (`sitePartials`) replaces every page's own header with `partials/header.html`, which contains an icon sprite but no contact links. Header edits must be made in the partial.
+
+**C. Certification cards are far too big.** Each card has a 4:3 image area with a button below, so six credentials fill several screens. The images are hot-linked from LinkedIn's CDN with signed tokens that **expire on Oct 6, Oct 8 and Oct 15, 2026**. After that every image will be broken. The "verify" button opens the same image, not a verification page.
+
+**C2. Article cover images have the same expiring-token problem.**
+
+**D. Case Studies index is thin.** Four plain cards, no filter, no metrics, no stack, no status, and two covers are missing (`/assets/acas-cover.png`, `/assets/revenuelift-cover.png`, so a text placeholder shows). There is no F1 case study although F1 is my featured project.
+
+**E. Case study detail pages are inconsistent and mostly static.**
+- `acas.html`, `uber-eats.html`, `revenuelift.html` are minified single-line HTML, each with its own duplicated CSS; `dataguard.html` has 840 lines of inline CSS. `about.html` (870) and `projects/index.html` (790) do the same.
+- `vite.config.js` deletes every inline `<script>` on project detail pages with a regex, and rewrites `p<0.0001` with a string replace. Both are hacks that hide problems.
+- Uber Eats has a placeholder live URL (see CONFIG).
+- "What broke" sections contain internal notes ("The README does not identify…", "This case study does not invent one", "the supplied README"). These read as unfinished. Rewrite in first person.
+- Animation is limited to reveal-on-scroll and the diagram wires.
+
+**F. Site-wide problems.**
+- `src/style.css` has duplicated `:root`, `html`, `body` blocks and dead legacy CSS (`hero-bg`, `gradient-text`, `portrait-glow`, `social-icon`, `section-title`, `project-card`, `skill-card` are used nowhere) plus a font (Space Grotesk) that is never loaded.
+- `@import "tailwindcss"` and the Tailwind Vite plugin are installed but no Tailwind utilities are used intentionally. Custom class names like `.grid` may collide with Tailwind.
+- Cover PNGs are 1.6–3.0 MB each.
+- No favicon, no canonical URL, and Open Graph tags only on Home. No skip link, and `<main>` has no id.
+- F1 status differs between Home and Projects pages.
+- Missing assets referenced in code: `kafka.svg`, `spark.svg`, `cassandra.svg`, `duckdb.svg`, `powerbi.svg`, `git.svg`, `dbt.svg`, `sql.svg`, and covers for Job Market, Logistics, Spotify, Weather ETL, BookVault, Clinic, EcoVita, Homestacks, DataGuard Core and DataGuard Insights.
+
+### 4. PHASE 1: Foundation (do first; visuals should not change except that the three broken pages get fixed)
+1. In `src/style.css` create one clean structure: tokens, base, layout primitives (`.site-shell`; keep `.shell` and `.sec` as documented aliases), typography (`text-wrap: balance` on headings, `pretty` on paragraphs), buttons, tags, cards, reveal utilities.
+2. Move the inline `<style>` blocks out of `index.html`, `about.html`, `projects/index.html`, `projects/dataguard.html`, `acas.html`, `uber-eats.html`, `revenuelift.html` into `src/css/` files: shared parts into `style.css`, page-specific parts into `src/css/pages/<page>.css`, linked from each page. Deduplicate identical rules. Reformat the minified pages with readable HTML.
+3. Delete the dead legacy CSS and the duplicate blocks. Decide about Tailwind: **default is to remove the plugin and the import** unless a real utility class is in use. Confirm pages look identical afterwards.
+4. Move all shared behaviour into `src/main.js` as small guarded functions (`initMenu`, `initProgress`, `initReveal`, `initCounters`, `initTilt`, `initScrollSpy`, `initFilters`, `initLightbox`, `initCopy`, `initHeaderCollapse`). Remove the inline scripts from the pages and **remove the two hacks in `vite.config.js`** (script stripping on project pages and the `p<0.0001` replacement). Fix the source instead (`p &lt; 0.0001`).
+5. Add `<main id="main">`, a skip-to-content link, `@view-transition { navigation: auto; }` with a 250 ms cross-fade, and a back-to-top button.
+
+Done when: all pages render inside a centred container, the build is clean, and no page has an inline `<style>` or `<script>`.
+
+### 5. PHASE 2: Header and footer (edit only `partials/`, plus `vite.config.js` if the active-link logic needs it)
+**Requirement:** the header must show my contact details and CV as **icon + name**, matching the UI.
+
+Design:
+- **Utility bar** (40 px, above the main bar): Email (icon + address), Phone (icon + number, `tel:`), LinkedIn (icon + "LinkedIn"), GitHub (icon + "GitHub"), and a **Download CV** pill button (download icon + label, `download` attribute) at the right. External links use `target="_blank" rel="noopener noreferrer"`. The bar slides away on scroll-down and returns on scroll-up (`transform` only).
+- **Main bar** (sticky, blurred): brand, nav, and a mint "Contact" button. Rename the nav item **"Certifications + Articles" to "Credentials"** (same URL) so six items fit. Add a sliding underline indicator under the active/hovered link.
+- Breakpoints: ≥1200 px full labels; 900–1199 px icons with short labels; <900 px the utility bar is hidden and the mobile drawer shows a **2-column grid of contact tiles** (icon + name + value) plus the CV button. The drawer closes on link click, Escape and outside click (already in `main.js`; keep it).
+- Add symbols `i-phone`, `i-download`, `i-arrow-up-right` to a single icon sprite (move the sprite into its own `partials/icons.html` injected once).
+- Hover: icon lifts 2 px and turns mint. Every icon-only element has an `aria-label`.
+
+**Footer:** replace the single button with a real footer: brand and one-line pitch; a "Pages" column; a "Connect" column with the same icon + name links (email, phone, LinkedIn, GitHub, WhatsApp) and CV; bottom row with © and "Back to top". Keep the "Open to data engineering, analytics and DBA roles" line with a pulsing status dot.
+
+### 6. PHASE 3: Certifications and Articles page
+**Certifications**
+- Replace the large image cards with **compact credential cards** (about 120–140 px tall): issuer badge (self-hosted SVG or monogram, not the certificate image), title (2-line clamp), issuer, issue date, credential ID if in CONFIG, and two actions: **Verify** (real URL from CONFIG; if TODO, disable with a tooltip "verification link coming") and **Preview** (opens an accessible lightbox with the self-hosted certificate image).
+- Grid: 3 columns ≥1100 px, 2 columns ≥700 px, 1 column below.
+- Add **issuer filter chips** (All, AWS, Oracle, Microsoft) with counts; filtering animates with a 180 ms fade and scale, and supports keyboard use. Order Oracle credentials first (most relevant to DBA and data roles), then AWS, then Microsoft.
+- Hero: keep the title, add count-up stats (certifications, issuers, articles).
+- **Self-host every image.** Do not fetch. Create `public/assets/certs/` and `public/assets/articles/`, point the code at local `.webp` files, and create `TODO-assets.md` listing each current LinkedIn URL and the target filename so I can download them **before Oct 6, 2026**. Keep `data-fallback` so a missing image shows a designed placeholder.
+- Optional "Show all (n)" expander for extra certificates I confirm later.
+
+**Articles**
+- Featured layout: the first article as a large card (cover, "LinkedIn" badge, date, reading time, 2-line summary, 2–3 topic tags), the second beside or below it. Add a "Follow on LinkedIn" link. Use TODO for dates and reading times.
+
+### 7. PHASE 4: Contact page
+- Two-column layout (stacked on mobile).
+- **Left, "Reach me directly":** rows with icon, label, value, a **copy button** with a "Copied ✓" toast (Email, Phone) and an open-in-new-tab arrow: Email, Phone, WhatsApp, LinkedIn, GitHub, CV. Add the missing Phone row.
+- **Right, "Send a message":** form with Name, Email, Reason (Job opportunity / Freelance / Collaboration / Other), Message. Post to the CONFIG endpoint with `fetch`; include a honeypot field, client-side validation, inline error text, disabled-while-sending state and a success message. If the endpoint is TODO, fall back to a `mailto:` link with the subject and body prefilled and show a TODO note in your report.
+- **Availability card:** pulsing dot, "Open to data engineering, analytics, BI and DBA roles", location and timezone, typical reply time (CONFIG).
+- Effects: staggered reveal, field focus glow, magnetic primary button (hover devices only), copy feedback animation.
+
+### 8. PHASE 5: Case studies
+**Index page (`case-studies/index.html`)**
+- Featured hero card for **DataGuard** (image left; metric chips: 100% precision and recall on injected faults, 6.4× at 1M rows, 13/13 tests).
+- Grid for the rest. Each card shows: category, status (Complete / Live / In progress), one key metric, my role (for ACAS: "group project, my part: privacy layer, orchestration, routing, audit, API"), stack chips with logos, "Synthetic data" label where relevant, and read time.
+- Filter chips (Data Engineering, Analytics and BI, AI and ML).
+- Add an **F1 Real-Time Pipeline** card and page (`projects/f1-pipeline.html`, register it in `vite.config.js`). I will attach `f1-case-study.md`; build the page from it and keep every **[UPDATE]** and **[MEASURE]** marker visible. Show honest status from CONFIG.
+- Replace text-only fallbacks with a designed cover component (gradient, large monogram, animated mini-pipeline in CSS). Generate lightweight SVG covers for every missing image listed in finding F.
+
+**Detail pages (all five, one shared template and shared CSS)**
+1. **Hero meta panel:** Role, Timeline, Stack (logos), Status, Data type (real or synthetic), Links.
+2. **Sticky in-page table of contents** with scroll-spy and a reading-progress indicator (desktop right rail; collapses on mobile).
+3. **Sticky action bar** (title plus repo and demo buttons) that appears after the hero scrolls out.
+4. **Results with motion:** count-up numbers, plus a tiny animated chart built from inline SVG or CSS: DataGuard speedup bars (naive SQL vs DataGuard at 100K and 1M rows: 2.3× and 6.4×); RevenueLift raw vs adjusted p-values and the mobile lift; Uber Eats demand-by-hour bars; ACAS agent order.
+5. **Architecture diagram:** keep the draw-on-scroll and moving packets; add hover/focus on each node to show a one-line explanation in a side panel, and a **Replay** button.
+6. **"What broke" as an accordion or timeline** with problem, cause and fix. Rewrite the placeholder wording in first person. Where no real bug exists, retitle to "What I'd improve" using the real limitations. **Remove every mention of "README" or "supplied README", and never write "this case study does not invent one".**
+7. **Screenshot gallery with lightbox** (I will supply images; use designed placeholders until then).
+8. **Previous / next case study** navigation at the bottom.
+9. Fix the Uber Eats demo link per CONFIG.
+
+### 9. PHASE 6: Global polish
+- **About page:** show role dates exactly as CONFIG says. No "currently" or "present" wording for a role that ended. Make the timeline line draw on scroll.
+- **One source of truth for projects:** create `src/data/projects.js` used by the Home featured section and the Projects gallery so F1 status and links cannot drift. Keep static case-study cards.
+- **Images:** convert cover PNGs to WebP (target ≤200 KB), add `width`/`height`, `loading="lazy"` and `decoding="async"` (not on the hero image).
+- **SEO:** favicon, canonical, Open Graph and Twitter tags on every page, `sitemap.xml`, `robots.txt`, Person JSON-LD on Home.
+- **Missing logos:** wire the skill logos so the letter-badge fallback upgrades automatically when I add `kafka.svg`, `spark.svg`, `cassandra.svg`, `duckdb.svg`, `powerbi.svg`, `git.svg`, `dbt.svg`, `sql.svg`; list them in `TODO-assets.md`.
+- Motion budget: one memorable animation per page, everything else quiet.
+
+### 10. Definition of done (verify and report each item)
+- `npm run build` is clean; `npm run preview` works.
+- Checked at 375, 768, 1024 and 1440 px: no horizontal scroll, nothing flush to the edge.
+- Keyboard: skip link, menu, filters, lightbox and form all work; focus is always visible.
+- Reduced motion: no animation plays and all content is visible.
+- Lighthouse on Home, Certifications, Contact and DataGuard: Accessibility, Best Practices and SEO ≥ 95, Performance ≥ 90.
+- All external links open; none point to a placeholder.
+- No image or link depends on a LinkedIn CDN URL.
+
+### 11. Report format after each phase
+1. Files changed (paths).
+2. What was fixed, mapped to findings A–F.
+3. Every `TODO` still open.
+4. Anything you chose not to do, and why.
+
+## PROMPT END
